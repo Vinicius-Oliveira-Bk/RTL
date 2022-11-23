@@ -1,48 +1,37 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
+import renderWithRouter from '../renderWithRouter';
 
 describe('Verificando componente App', () => {
   it('Testanto rota <Home />', () => {
-    const historico = createMemoryHistory();
-    render(
-      <Router history={ historico }>
-        <App />
-      </Router>
-    );
+    const { history } = renderWithRouter(<App />);
     const rota = screen.getByRole('link', {
       name: 'Home',
     });
 
     expect(rota).toBeInTheDocument();
-    expect(historico.location.pathname).toBe('/');
+    expect(history.location.pathname).toBe('/');
   });
+
   it('Testanto rota <About />', () => {
-    const historico = createMemoryHistory();
-    render(
-      <Router history={ historico }>
-        <App />
-      </Router>
-    );
-    const rota = screen.getByRole('link', {
+    const { history } = renderWithRouter(<App />);
+    const aboutLink = screen.getByRole('link', {
       name: 'About',
     });
-    // expect(historico.location.pathname).toBe('/about');
-    expect(rota).toBeInTheDocument();
+    userEvent.click(aboutLink);
+    expect(history.location.pathname).toBe('/about');
+    expect(aboutLink).toBeInTheDocument();
   });
+
   it('Testando rota Favorite Pokémon', () => {
-    const historico = createMemoryHistory();
-    render(
-      <Router history={ historico }>
-        <App />
-      </Router>
-    );
-    const rota = screen.getByRole('link', {
+    const { history } = renderWithRouter(<App />);
+    const favoriteLink = screen.getByRole('link', {
       name: 'Favorite Pokémon',
     });
-
-    expect(rota).toBeInTheDocument();
+    userEvent.click(favoriteLink);
+    expect(history.location.pathname).toBe('/favorites');
+    expect(favoriteLink).toBeInTheDocument();
   });
 });
