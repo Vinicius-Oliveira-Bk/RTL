@@ -9,7 +9,7 @@ describe('Renderizando as informações corretas no componmente <About />.', () 
     renderWithRouter(<About />);
     const aboutPokedex = screen.getByRole('heading', {
       level: 2,
-      name: /About Pokédex/i,
+      name: 'About Pokédex',
     });
 
     expect(aboutPokedex).toBeInTheDocument();
