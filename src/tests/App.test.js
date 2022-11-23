@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
-describe('Verificando componente App', () => {
+describe('Verificando rotas do componente App', () => {
   it('Testanto rota <Home />', () => {
     const { history } = renderWithRouter(<App />);
     const rota = screen.getByRole('link', {
