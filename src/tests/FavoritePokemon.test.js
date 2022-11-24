@@ -9,7 +9,7 @@ describe('Verifica o comportamento da página Favorite Pokémon', () => {
     renderWithRouter(<FavoritePokemon
       pokemonList={ pokemonList }
     />);
-    const noFavorites = await screen.findByText('No favorite Pokémon found');
+    const noFavorites = await screen.findByText(/No favorite Pokémon found/i);
 
     expect(noFavorites).toBeInTheDocument();
   });
