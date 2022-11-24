@@ -1,22 +1,22 @@
 // Começando projeto :ROCKET:
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { About } from '../pages';
 import renderWithRouter from '../renderWithRouter';
 
 describe('Renderizando as informações corretas no componmente <About />.', () => {
   it('Verifica se o elemento h2 é renderizado com o texto "About Pokédex".', () => {
-    renderWithRouter(<About />);
+    render(<About />);
     const aboutPokedex = screen.getByRole('heading', {
       level: 2,
-      name: 'About Pokédex',
+      name: /About Pokédex/i,
     });
 
     expect(aboutPokedex).toBeInTheDocument();
   });
 
   it('Verifica se há duas tag <p> na página About refente a Pokedex.', () => {
-    renderWithRouter(<About />);
+    render(<About />);
     const p1 = screen.getByText(/This application simulates a Pokédex, a digital encyclopedia containing all Pokémon/i);
     const p2 = screen.getByText(/One can filter Pokémon by type, and see more details for each one of them/i);
 
@@ -27,10 +27,11 @@ describe('Renderizando as informações corretas no componmente <About />.', () 
   it('Verifica se a imagem da Pokedex é renderizada.', () => {
     renderWithRouter(<About />);
     const pokedex = screen.getByRole('img', {
-      alt: /Pokédex/i,
+      name: /Pokédex/i,
       src: 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
     });
 
     expect(pokedex).toBeInTheDocument();
+    expect(pokedex.getAttribute('src')).toBe('https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
