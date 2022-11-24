@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { NotFound } from '../pages';
-import renderWithRouter from '../renderWithRouter';
 
 describe('Teste o componente <NotFound.js />', () => {
   it('É exibido na tela um h2 com o texto Page requested not found', () => {
