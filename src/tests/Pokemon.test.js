@@ -37,12 +37,17 @@ describe('Teste o componente <Pokemon.js />', () => {
       pokemon={ POKEMON }
       isFavorite={ isFavorite }
     />);
+    const link = screen.getByRole('link', {
+      name: /more details/i,
+      href: '/pokemon/25',
+    });
     const src = screen.getByRole('img', {
       name: /Pikachu sprite/i,
       src: IMAGE_PIKACHU,
     });
     expect(src).toBeInTheDocument();
     expect(src.getAttribute('src')).toBe(IMAGE_PIKACHU);
+    expect(link.getAttribute('href')).toBe('/pokemon/25');
   });
 
   it('A imagem do pokemon possui o alt <name> sprite', () => {
